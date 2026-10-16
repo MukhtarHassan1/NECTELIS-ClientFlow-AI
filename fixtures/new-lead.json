@@ -1,0 +1,11 @@
+{
+  "event_id": "sample-home-001",
+  "source": "website_form",
+  "client_key": "home-services-demo",
+  "lead": {
+    "first_name": "Alex", "email": "alex.demo@example.com", "phone": "+15550101001",
+    "service": "air_conditioner_repair", "postal_area": "Demo District",
+    "message": "Urgent AC repair request this week", "consent_to_contact": true
+  },
+  "requested_slot": "2030-10-16T14:00:00-04:00"
+}

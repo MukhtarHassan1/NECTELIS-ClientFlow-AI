@@ -1,0 +1,11 @@
+NECTELIS — Connector Observatory browser verification
+Environment: Chromium headless, isolated browser harness with the actual local FastAPI
+request handler bridged into browser fetch; external network navigation was blocked.
+Provider scenarios manually clicked through browser JavaScript controls: 10/10 PASS
+  GHL booking, replay, contact update, rate limit 429, unavailable slot,
+  authorization failure 401, changed-body replay rejection, ambiguous post-write timeout
+  Vapi end-of-call contract, Twilio signed SMS contract
+Browser JavaScript errors observed: 0
+Responsive check (390 px mobile width): no horizontal overflow
+IMPORTANT: all tests use LOCAL HTTP emulation, not provider networks.
+Screenshot: connector-observatory-desktop.png / connector-observatory-mobile.png

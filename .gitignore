@@ -1,0 +1,54 @@
+.env
+.env.*
+!.env.example
+*.sqlite3
+*.sqlite3-*
+__pycache__/
+.pytest_cache/
+.venv/
+*.pyc
+.coverage
+htmlcov/
+*.log
+.DS_Store
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets and configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# Local databases
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# Generated data and logs
+*.log
+evidence/*local*.json
+evidence/*latest*.json
+evidence/*report*.json
+
+# Packaging
+*.zip
+*.mp4
+
+# Editor and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,24 @@
+NECTELIS / ClientFlow AI — Signal Room UI interaction verification
+Environment date: 2026-10-14
+Frontend: actual HTML, CSS and JS from this project
+Backend: actual local FastAPI / SQLite application (mock connector mode)
+Browser: Chromium headless (1440 x 950 desktop; 390 x 844 mobile)
+Build environment restriction: localhost navigation blocked by browser policy.
+Workaround: HTML/CSS/JS loaded via Playwright.set_content/add_*; JS fetch bridged to Python HTTP requests against actual local FastAPI endpoints.
+THIS IS NOT a real GHL, n8n, production CRM, or external service test.
+
+Clean capture: VERIFIED
+Replay shield: VERIFIED
+Identity update: VERIFIED
+Slot contention: VERIFIED
+Mock 429 recovery: VERIFIED
+Mock 401 isolation: VERIFIED
+No consent -> review: VERIFIED
+Mock notification failure with booking retained: VERIFIED
+Result: 8 / 8 scenarios verified
+Browser JavaScript exceptions: 0
+Room settings opened and compact-density toggle checked: VERIFIED
+390 px layout horizontal overflow: FALSE
+Screenshots: clientflow-signal-room-overview.png, clientflow-signal-room-tested.png, clientflow-signal-room-mobile.png
+
+Backend pytest result separately stored in pytest-results.txt and pytest-junit.xml.

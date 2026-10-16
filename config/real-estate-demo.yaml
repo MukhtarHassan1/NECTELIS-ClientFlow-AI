@@ -1,0 +1,27 @@
+client_key: real-estate-demo
+company_name: Horizon Realty [SYNTHETIC]
+industry: real_estate
+timezone: America/New_York
+crm_adapter: mock
+calendar_adapter: mock
+calendar:
+  duration_minutes: 45
+  business_hours_start: 10
+  business_hours_end: 19
+pipeline:
+  new: New Inquiry
+  qualified: Viewing Qualified
+  booked: Viewing Scheduled
+  review: Agent Review
+qualification:
+  supported_services: [property_viewing, rental_consultation, buying_consultation]
+  urgent_words: [urgent, asap, relocating, ready to move]
+  min_confidence_for_auto_booking: 0.65
+notifications:
+  internal_enabled: true
+  lead_enabled: true
+  external_enabled: false
+  test_recipient_allowlist: [team.demo@example.com]
+reliability:
+  max_transient_attempts: 3
+  idempotency_window_hours: 72

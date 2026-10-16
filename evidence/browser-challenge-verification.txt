@@ -1,0 +1,16 @@
+NECTELIS CLIENTFLOW / REVIEWER-CONTROLLED PROOF CHECK
+Environment: headless Chromium, 1440x920 viewport, browser JS executes against a FastAPI TestClient and fresh temporary SQLite DB via an in-process bridge. Direct localhost navigation is prohibited by this build environment; the browser was still exercised with real API handler responses.
+Reviewer phrase: client chose code 49
+Synthetic name: Alex Reviewer
+Actual result: 07/07 BACKEND VERIFIED
+- Fresh event creates booked lead PASS
+- Exact replay returns duplicate-event verdict PASS
+- SQLite verifies actual event/contact/booking PASS
+- Exactly one new event in storage PASS
+- Exactly one new contact in storage PASS
+- Exactly one new appointment in storage PASS
+- Mutated replay blocked by HTTP 409 PASS
+Browser uncaught JavaScript errors: 0
+Export evidence button enabled: yes
+Screenshot: reviewer-challenge-browser.png
+External provider calls: zero (intentional mock-only test)

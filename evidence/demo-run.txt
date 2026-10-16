@@ -1,0 +1,113 @@
+
+NEW BOOKING 
+{
+  "event_id": "walkthrough-6e8cd477",
+  "audit_id": "aud_cbd89f1cf3d0473c",
+  "connector_mode": "MOCK / SYNTHETIC",
+  "duplicate_event": false,
+  "qualification": {
+    "label": "qualified",
+    "confidence": 0.95,
+    "priority": "high",
+    "reason": "Supported service + explicit consent; priority determined by urgency keywords",
+    "method": "deterministic_rules (AI-ready interface)"
+  },
+  "ai_advisory": {
+    "enabled": false,
+    "status": "not_configured",
+    "method": "deterministic_only"
+  },
+  "contact_id": "con_f2fc042eaa9240f6",
+  "crm_action": "created",
+  "appointment_id": "apt_c1e2bfd4e309435d",
+  "notification_status": "logged_only",
+  "follow_up_status": "queued_for_human_review",
+  "opportunity_stage": "Appointment Booked",
+  "status": "booked"
+}
+AUDIT STEPS: ['receive', 'qualification', 'crm', 'contact_upsert', 'calendar', 'booking', 'pipeline', 'follow_up', 'notification', 'external_communication']
+
+EXACT REPLAY 
+{
+  "event_id": "walkthrough-6e8cd477",
+  "audit_id": "aud_cbd89f1cf3d0473c",
+  "connector_mode": "MOCK / SYNTHETIC",
+  "duplicate_event": true,
+  "qualification": {
+    "label": "qualified",
+    "confidence": 0.95,
+    "priority": "high",
+    "reason": "Supported service + explicit consent; priority determined by urgency keywords",
+    "method": "deterministic_rules (AI-ready interface)"
+  },
+  "ai_advisory": {
+    "enabled": false,
+    "status": "not_configured",
+    "method": "deterministic_only"
+  },
+  "contact_id": "con_f2fc042eaa9240f6",
+  "crm_action": "created",
+  "appointment_id": "apt_c1e2bfd4e309435d",
+  "notification_status": "logged_only",
+  "follow_up_status": "queued_for_human_review",
+  "opportunity_stage": "Appointment Booked",
+  "status": "booked",
+  "replayed": true
+}
+AUDIT STEPS: ['receive', 'qualification', 'crm', 'contact_upsert', 'calendar', 'booking', 'pipeline', 'follow_up', 'notification', 'external_communication']
+
+CONTACT UPDATE 
+{
+  "event_id": "walkthrough-6e8cd477-updated",
+  "audit_id": "aud_9c5fcc73c28b4b30",
+  "connector_mode": "MOCK / SYNTHETIC",
+  "duplicate_event": false,
+  "qualification": {
+    "label": "qualified",
+    "confidence": 0.95,
+    "priority": "high",
+    "reason": "Supported service + explicit consent; priority determined by urgency keywords",
+    "method": "deterministic_rules (AI-ready interface)"
+  },
+  "ai_advisory": {
+    "enabled": false,
+    "status": "not_configured",
+    "method": "deterministic_only"
+  },
+  "contact_id": "con_f2fc042eaa9240f6",
+  "crm_action": "updated",
+  "appointment_id": null,
+  "notification_status": "logged_only",
+  "follow_up_status": "queued_for_human_review",
+  "opportunity_stage": "Appointment Booked",
+  "status": "qualified_no_booking_requested"
+}
+AUDIT STEPS: ['receive', 'qualification', 'crm', 'contact_upsert', 'pipeline', 'pipeline', 'follow_up', 'notification', 'external_communication']
+
+429 -> SUCCESS 
+{
+  "event_id": "walkthrough-6e8cd477-retry",
+  "audit_id": "aud_a493ea0a9d0042ba",
+  "connector_mode": "MOCK / SYNTHETIC",
+  "duplicate_event": false,
+  "qualification": {
+    "label": "qualified",
+    "confidence": 0.95,
+    "priority": "high",
+    "reason": "Supported service + explicit consent; priority determined by urgency keywords",
+    "method": "deterministic_rules (AI-ready interface)"
+  },
+  "ai_advisory": {
+    "enabled": false,
+    "status": "not_configured",
+    "method": "deterministic_only"
+  },
+  "contact_id": "con_4eed66df0da54f47",
+  "crm_action": "created",
+  "appointment_id": null,
+  "notification_status": "logged_only",
+  "follow_up_status": "queued_for_human_review",
+  "opportunity_stage": "Qualified",
+  "status": "qualified_no_booking_requested"
+}
+AUDIT STEPS: ['receive', 'qualification', 'crm', 'crm', 'contact_upsert', 'pipeline', 'follow_up', 'notification', 'external_communication']

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="ClientFlow AI — lead operations and provider integration workbench by NECTELIS.">
+  <title>ClientFlow AI — The Signal Room | NECTELIS</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app-shell" id="app-shell">
+    <header class="global-header">
+      <a href="#top" class="identity" aria-label="NECTELIS ClientFlow AI Home">
+        <span class="monogram" aria-hidden="true"><svg width="29" height="29" viewBox="0 0 32 32" fill="none"><path d="M4 26V6L28 26V6" stroke="currentColor" stroke-width="3.3" stroke-linejoin="round"/><circle cx="26.5" cy="6" r="3.5" fill="#ffbc82"/></svg></span>
+        <span class="identity-text"><b>NECTELIS</b><small>ENGINEERING / OPERATIONS SYSTEMS</small></span>
+      </a>
+      <nav class="top-navigation" aria-label="Workspace navigation">
+        <a href="#lab" class="nav-link current">01 <span>Test studio</span></a>
+        <a href="#connectors" class="nav-link">02 <span>Integrations</span></a>
+        <a href="#evidence" class="nav-link">03 <span>Activity</span></a>
+        <a href="#system" class="nav-link">04 <span>Handoff</span></a>
+      </nav>
+      <div class="header-right"><span class="environment-status"><span class="live-ping"></span> LOCAL SANDBOX <span class="slash">/</span> MOCK CRM</span><button type="button" id="open-settings" class="icon-btn" aria-label="Open operator settings" title="Operator settings"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.65"><circle cx="12" cy="12" r="3"/><path d="m19 13 2-1-2-1-.6-3 1-2-2-2-2 1-3-.6-1-2-1 2-3 .6-2-1-2 2 1 2-.6 3-2 1 2 1 .6 3-1 2 2 2 2-1 3 .6 1 2 1-2 3-.6 2 1 2-2-1-2z"/></svg></button></div>
+    </header>
+
+    <main id="top">
+      <section class="intro content-wrap" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <div class="technical-label"><span class="tiny-square"></span> NECTELIS FIELD SYSTEM / CF-01 <span class="label-line"></span> OPERATIONS CONSOLE</div>
+          <h1 id="page-title">Make every signal<br><em>count.</em></h1>
+          <p class="intro-lead">A lead comes in. The system makes a decision. Every action leaves a trace.</p>
+          <p class="intro-sub">One configurable intake-to-booking engine — with the difficult cases exposed, not hidden.</p>
+          <div class="intro-actions"><a class="primary-action" href="#lab">Open the test studio <span>↗</span></a><a class="quiet-action" href="#evidence">Explore live activity <span>↗</span></a></div>
+          <div class="status-rail"><span><i class="active-indicator"></i> ENGINE <b id="health-engine">CHECKING</b></span><span>QUALIFICATION <b id="health-ai">RULE-BASED</b></span><span>OUTBOUND <b>DISABLED</b></span></div>
+        </div>
+        <div class="signal-map" aria-label="Five-stage operation diagram, highlighted when tests run">
+          <div class="map-heading"><span>OPERATION TOPOLOGY</span><span class="map-fraction">05 / 05</span></div>
+          <svg class="map-geometry" viewBox="0 0 550 340" role="presentation" aria-hidden="true"><defs><linearGradient id="signalGradient" x1="0" x2="1"><stop offset="0%" stop-color="#33415b"/><stop offset="45%" stop-color="#ffb67c"/><stop offset="100%" stop-color="#6c8bad"/></linearGradient></defs><path d="M12 180 H122 C157 180 156 83 212 83 H321 C388 83 356 253 424 253 H535" stroke="url(#signalGradient)" stroke-width="1.8" fill="none" stroke-dasharray="5 7"/><path d="M12 188 H125 C160 188 170 91 215 91 H310 C374 91 367 260 430 260 H535" stroke="#263750" stroke-width="1" fill="none"/><path d="M20 50 L20 307 M530 35 L530 305" stroke="#263147" stroke-width="1" stroke-dasharray="2 8"/><circle cx="276" cy="171" r="132" fill="none" stroke="#283348"/><circle cx="276" cy="171" r="99" fill="none" stroke="#243247" stroke-dasharray="3 10"/><circle cx="276" cy="171" r="58" fill="none" stroke="#273752"/><circle cx="276" cy="171" r="6" fill="#ffb67c"/><circle cx="276" cy="171" r="21" fill="none" stroke="#ffb67c" stroke-opacity=".35"/><path d="M260 171 H292 M276 155 V187" stroke="#ffb67c" stroke-width="1.2"/><circle class="orbita" cx="144" cy="180" r="4.5" fill="#ffb67c"/><circle cx="375" cy="250" r="3" fill="#96b0cf"/></svg>
+          <div class="node node-one flow-node" data-flow="receive"><span class="node-number">01 / RECEIVE</span><b>Intake</b><small>Webhook + schema</small></div>
+          <div class="node node-two flow-node" data-flow="contact"><span class="node-number">02 / RESOLVE</span><b>CRM identity</b><small>Lookup / upsert</small></div>
+          <div class="node node-three flow-node" data-flow="qualify"><span class="node-number">03 / ROUTE</span><b>Qualification</b><small>Deterministic</small></div>
+          <div class="node node-four flow-node" data-flow="booking"><span class="node-number">04 / SCHEDULE</span><b>Availability</b><small>Conflict-aware</small></div>
+          <div class="node node-five flow-node" data-flow="audit"><span class="node-number">05 / ACCOUNT</span><b>Evidence</b><small>Persistent audit</small></div>
+          <div class="map-legend"><span><i class="legend-dot peach"></i> STEP OBSERVED</span><span><i class="legend-dot blue"></i> AWAITING EVENT</span></div>
+        </div>
+      </section>
+
+      <section class="boundary-notice content-wrap" role="note"><span class="notice-symbol">!</span><p><b>Environment: Local sandbox.</b> CRM, calendar and messaging scenarios use an isolated provider emulator. Authorized live account validation is managed separately.</p><span class="notice-code">MOCK / SYNTHETIC</span></section>
+
+      <section class="telemetry content-wrap" aria-label="Live synthetic operation counts"><article><span class="metric-index">A / INTAKE</span><strong id="m-events">—</strong><small>Events processed</small><span class="metric-arrow">↗</span></article><article><span class="metric-index">B / IDENTITY</span><strong id="m-contacts">—</strong><small>CRM-style contacts</small><span class="metric-arrow">↗</span></article><article><span class="metric-index">C / SCHEDULE</span><strong id="m-bookings">—</strong><small>Reserved appointments</small><span class="metric-arrow">↗</span></article><article><span class="metric-index">D / RECOVERY</span><strong id="m-followups">—</strong><small>Human-review actions</small><span class="metric-arrow">↗</span></article></section>
+
+      <section class="studio content-wrap" id="lab">
+        <div class="section-header"><div><div class="technical-label">01 — EXECUTION</div><h2>The test studio<span class="title-mark">.</span></h2><p>Run a synthetic inquiry, or pressure-test the automation with controlled failure scenarios.</p></div><span class="section-meta" id="active-profile">PROFILE / HOME SERVICES</span></div>
+        <div class="studio-grid">
+          <div class="work-panel lead-panel"><div class="panel-header"><div class="panel-no">A1</div><div><span class="panel-eyebrow">LIVE INPUT / CONTROLLED</span><h3>Incoming lead</h3></div><span class="header-symbol">↘</span></div>
+            <form id="lead-form" novalidate><div class="fields">
+              <label class="span-two">Client profile<select id="profile" name="client_key" required><option value="home-services-demo">Northline Home Services</option><option value="real-estate-demo">Horizon Realty</option></select></label>
+              <label>First name<input id="first_name" name="first_name" value="Alex" maxlength="100" autocomplete="off" required></label>
+              <label>Email address<input id="email" name="email" type="email" value="alex.demo@example.com" maxlength="254" autocomplete="off"></label>
+              <label>Contact phone <span class="hint-inline">E.164</span><input id="phone" name="phone" value="+15550101001" autocomplete="off"></label>
+              <label>Service request<select id="service" name="service" required></select></label>
+              <label class="span-two">What does the client need?<textarea id="message" name="message" rows="3" maxlength="1200">Urgent AC repair request this week</textarea></label>
+              <label class="span-two">Preferred appointment · your browser's local time<input id="slot" name="slot" type="datetime-local"><small class="field-note" id="timezone-note">The request is converted to UTC; booking rules use the selected client's timezone.</small></label>
+              <label class="span-two consent"><input type="checkbox" id="consent" checked><span>Explicit permission to contact this synthetic lead</span></label>
+            </div><button type="submit" id="submit" class="run-button"><span>PROCESS THIS INQUIRY</span><span class="run-arrow">↗</span></button><div class="form-foot"><i class="dot"></i> LOCAL DATA WRITES ONLY <span>NO EMAIL / SMS / CALLS</span></div></form>
+          </div>
+          <div class="work-panel scenario-panel"><div class="panel-header"><div class="panel-no orange-no">B1</div><div><span class="panel-eyebrow">TEST BENCH / EXCEPTION PATHS</span><h3>Stress the system</h3></div><button type="button" id="run-suite" class="suite-button">RUN ALL EIGHT <span>↗</span></button></div>
+            <p class="scenario-description">The successful path is only the beginning. Each simulation writes a real, inspectable local execution trace.</p>
+            <div class="scenario-grid">
+              <button type="button" class="scenario-tile" data-scenario="new"><span class="scenario-top"><b>01</b><i class="scenario-glyph">↗</i></span><strong>Clean capture</strong><small>New contact → booked slot</small><span class="scenario-state" id="scenario-state-new">READY</span></button>
+              <button type="button" class="scenario-tile" data-scenario="replay"><span class="scenario-top"><b>02</b><i class="scenario-glyph">≡</i></span><strong>Replay shield</strong><small>Repeat event → no second write</small><span class="scenario-state" id="scenario-state-replay">READY</span></button>
+              <button type="button" class="scenario-tile" data-scenario="update"><span class="scenario-top"><b>03</b><i class="scenario-glyph">↻</i></span><strong>Identity update</strong><small>Existing contact, updated fields</small><span class="scenario-state" id="scenario-state-update">READY</span></button>
+              <button type="button" class="scenario-tile" data-scenario="conflict"><span class="scenario-top"><b>04</b><i class="scenario-glyph">⊘</i></span><strong>Slot contention</strong><small>One time, two requests</small><span class="scenario-state" id="scenario-state-conflict">READY</span></button>
+              <button type="button" class="scenario-tile" data-scenario="ratelimit"><span class="scenario-top"><b>05</b><i class="scenario-glyph">◷</i></span><strong>Rate-limit recovery</strong><small>429 → bounded retry</small><span class="scenario-state" id="scenario-state-ratelimit">READY</span></button>
+              <button type="button" class="scenario-tile" data-scenario="unauthorized"><span class="scenario-top"><b>06</b><i class="scenario-glyph">⌁</i></span><strong>Auth interruption</strong><small>401 → stop safely</small><span class="scenario-state" id="scenario-state-unauthorized">READY</span></button>
+              <button type="button" class="scenario-tile" data-scenario="noconsent"><span class="scenario-top"><b>07</b><i class="scenario-glyph">◇</i></span><strong>Consent gate</strong><small>No opt-in → human review</small><span class="scenario-state" id="scenario-state-noconsent">READY</span></button>
+              <button type="button" class="scenario-tile" data-scenario="notification"><span class="scenario-top"><b>08</b><i class="scenario-glyph">!</i></span><strong>Notify failure</strong><small>Booking retained, fault audited</small><span class="scenario-state" id="scenario-state-notification">READY</span></button>
+            </div>
+            <div class="suite-footer"><span id="suite-message">NO SCENARIOS EXECUTED IN THIS SESSION</span><span class="suite-count" id="suite-count">00 / 08</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="connector-section" id="connectors">
+        <div class="content-wrap">
+          <div class="section-header connector-header"><div><div class="technical-label">02 — INTEGRATIONS / EXECUTION</div><h2>Integration desk<span class="title-mark">.</span></h2><p>Configure a scenario, execute provider adapters, and inspect HTTP operations, booking results and delivery lifecycles.</p></div><span class="connector-master-state">PROVIDER MODE / SANDBOX</span></div>
+          <div class="integration-banner"><span class="integration-spark">✳</span><div><b>End-to-end provider workflows</b><p>CRM updates, voice intake, and SMS delivery events pass through executable backend connectors and a local provider emulator. Credentials and live accounts are configured separately.</p></div><span class="integration-tag">SANDBOX MODE</span></div>
+          <div class="workbench-surface" id="operations-workbench">
+            <div class="wb-top"><div><span class="technical-label">OPERATIONS WORKBENCH / 01</span><h3>Run the integration<span>.</span></h3><p>Send a fresh synthetic request through the selected provider adapter. Inspect the actual HTTP trace, state transitions and safeguards.</p></div><span class="wb-mode"><i></i> LOCAL EMULATOR</span></div>
+            <div class="wb-columns">
+              <form id="wb-form" class="wb-input">
+                <label for="wb-provider">PROVIDER</label><select id="wb-provider"><option value="ghl">GoHighLevel — CRM & Booking</option><option value="vapi">Vapi — Voice Intake & Booking</option><option value="twilio">Twilio — SMS & Delivery</option></select>
+                <label for="wb-scenario">EXECUTION PATH</label><select id="wb-scenario"></select>
+                <label for="wb-name">SYNTHETIC CONTACT</label><input id="wb-name" value="Taylor Morgan" maxlength="60" autocomplete="off" required>
+                <label for="wb-phrase">RUN REFERENCE</label><input id="wb-phrase" value="NECTELIS-INTEGRATION-01" maxlength="50" autocomplete="off" required>
+                <div class="wb-actions"><button id="wb-run" type="submit">EXECUTE WORKFLOW <span>↗</span></button><button id="wb-export" type="button" disabled>EXPORT TRACE ↓</button></div>
+                <small>Change the reference for each run. No credentials are accepted or stored through this screen.</small>
+              </form>
+              <div class="wb-results"><div class="wb-results-head"><div><small>EXECUTION RECEIPT</small><h4 id="wb-title">Waiting for an event</h4></div><span id="wb-verdict" class="wb-verdict">READY</span></div>
+                <div id="wb-checks" class="wb-checks"><p>Select a provider and run a scenario to inspect its backend results.</p></div>
+                <div class="wb-trace-head">HTTP &amp; STATE TRANSITIONS <span id="wb-trace-count">—</span></div><div id="wb-trace" class="wb-trace" aria-live="polite">No requests executed yet.</div>
+                <details class="wb-raw"><summary>View machine-readable execution receipt</summary><pre id="wb-json">// No execution</pre></details>
+              </div>
+            </div>
+          </div>
+          <div class="reviewer-challenge" id="challenge-lab">
+            <div class="challenge-intro"><div class="technical-label">CLIENT-LED EXECUTION</div><h3>Take control of the run.</h3><p>Enter a unique reference and a synthetic contact. Execute the workflow, inspect database changes, and compare replay behavior in one place.</p><span>LOCAL CRM &amp; CALENDAR</span></div>
+            <div class="challenge-entry"><label for="challenge-phrase">REVIEWER'S CHALLENGE PHRASE</label><input id="challenge-phrase" type="text" maxlength="40" value="verify-my-build" autocomplete="off" placeholder="Ask the client for a random phrase"/><label for="challenge-name">SYNTHETIC CONTACT NAME</label><input id="challenge-name" type="text" maxlength="40" value="Taylor Demo" autocomplete="off" placeholder="Any synthetic name"/><div class="challenge-actions"><button type="button" id="run-challenge">EXECUTE INDEPENDENT CHECK ↗</button><button type="button" id="export-challenge" disabled>EXPORT ACTUAL EVIDENCE ↓</button></div></div>
+            <div class="challenge-readback" aria-live="polite"><div class="challenge-readback-head"><b>EXECUTION CHECKS</b><span id="challenge-verdict">AWAITING REVIEWER INPUT</span></div><div id="challenge-checks"><p>The executed HTTP request, replay responses, database counts and read-back assertions appear here.</p></div><details><summary>Inspect exact request and response evidence</summary><pre id="challenge-json">// No challenge executed</pre></details></div>
+          </div>
+          <div class="connector-layout">
+            <div class="connector-selection" aria-label="Integration contract scenarios">
+              <div class="connector-group-label">A / CRM, PIPELINE &amp; SCHEDULING</div>
+              <article class="integration-provider"><div class="integration-provider-top"><div class="provider-monogram">GH</div><div><h3>GoHighLevel</h3><p>Contacts · Opportunities · Calendars</p></div></div><div class="connector-mode">CONTACTS / OPPORTUNITIES / CALENDAR <span>EMULATOR</span></div><div class="provider-tests">
+                  <button type="button" class="provider-test" data-provider="ghl" data-test="booking">01 / Contact → pipeline → booked <span>↗</span></button>
+                  <button type="button" class="provider-test" data-provider="ghl" data-test="replay">02 / Replay → no double appointment <span>↗</span></button>
+                  <button type="button" class="provider-test" data-provider="ghl" data-test="update">03 / Existing record → stage update <span>↗</span></button>
+                  <button type="button" class="provider-test" data-provider="ghl" data-test="rate_limit">04 / HTTP 429 → bounded recovery <span>↗</span></button>
+                  <button type="button" class="provider-test" data-provider="ghl" data-test="unavailable">05 / No free slot → safely refuse <span>↗</span></button>
+                  <button type="button" class="provider-test" data-provider="ghl" data-test="unauthorized">06 / HTTP 401 → stop / review <span>↗</span></button>
+                  <button type="button" class="provider-test" data-provider="ghl" data-test="replay_mutation">07 / Reused ID + changed body → reject <span>↗</span></button>
+                  <button type="button" class="provider-test" data-provider="ghl" data-test="timeout_after_write">08 / Lost booking response → reconcile <span>↗</span></button>
+                </div></article>
+              <div class="connector-group-label">B / OPTIONAL INTAKE CHANNELS</div>
+              <div class="channel-button-grid"><button class="channel-tile provider-test" type="button" data-provider="vapi" data-test="inbound"><span class="channel-glyph">V</span><strong>Vapi</strong><small>End-call structured payload ↗</small></button><button class="channel-tile provider-test" type="button" data-provider="twilio" data-test="inbound"><span class="channel-glyph">T</span><strong>Twilio</strong><small>Signed SMS webhook ↗</small></button></div>
+            </div>
+            <div class="connector-output" aria-live="polite"><div class="connector-output-head"><div><small>CONNECTOR EXECUTION / HTTP TRACE</small><h3 id="contract-title">Inspect the wire</h3></div><span id="contract-verdict" class="contract-verdict">AWAITING TEST</span></div>
+              <div class="contract-roadmap"><div>01<span>INGEST</span></div><div>02<span>UPSERT</span></div><div>03<span>VALIDATE</span></div><div>04<span>COMMIT</span></div></div>
+              <div class="contract-telemetry"><div><small>MODE</small><b id="contract-mode">OFFLINE ONLY</b></div><div><small>PROVIDER</small><b id="contract-provider">NOT SELECTED</b></div></div>
+              <div class="contract-runlog" id="contract-log"><p>Choose a provider workflow to inspect each HTTP step, status code and processing decision.</p></div>
+              <div class="contract-foot"><span id="contract-hint">No live platform credentials are used in this laboratory.</span><button type="button" id="export-contract" disabled>EXPORT VERIFIED TRACE ↗</button></div>
+            </div>
+          </div>
+          <p class="connector-disclaimer"><strong>Activation:</strong> To switch from provider emulation to authorized test accounts, follow the integration setup guides supplied with this project. Account permissions, public webhook routing and provider-specific IDs must be confirmed.</p>
+        </div>
+      </section>
+
+      <section class="evidence-section" id="evidence"><div class="content-wrap"><div class="section-header"><div><div class="technical-label">03 — OBSERVABILITY / AUDIT</div><h2>Nothing disappears<span class="title-mark">.</span></h2><p>Real API responses, decision history, and persisted run records — inspectable end-to-end.</p></div><div class="evidence-actions"><button type="button" class="outline-btn" id="copy-result">COPY JSON <span>⧉</span></button><button type="button" class="outline-btn" id="refresh">REFRESH ↻</button></div></div>
+        <div class="evidence-grid"><div class="evidence-card output-card"><div class="evidence-head"><div><small>OUTPUT / JSON</small><h3>Last execution</h3></div><span class="execution-badge" id="result-state">AWAITING EVENT</span></div><pre id="result-json" tabindex="0">// Select any scenario to inspect a real API response.
+// Synthetic execution. No external CRM calls.</pre></div>
+          <div class="evidence-card trace-card"><div class="evidence-head"><div><small>DECISION / TIMELINE</small><h3>What happened</h3></div><span class="thin-pill" id="trace-count">00 STEPS</span></div><div class="trace-body" id="trace" aria-live="polite"><div class="empty-evidence"><span>⌁</span><b>No execution selected</b><p>Run an event to reveal each decision and its recorded outcome.</p></div></div></div></div>
+        <div class="ledger-card"><div class="ledger-head"><div><small>PERSISTENT / SQLITE</small><h3>Execution ledger</h3></div><div class="ledger-tools"><label for="ledger-filter">VIEW</label><select id="ledger-filter"><option value="all">All outcomes</option><option value="booked">Booked</option><option value="slot_unavailable">Slot unavailable</option><option value="needs_review">Human review</option><option value="connector_failed">Failed</option></select><span class="ledger-note">LATEST 30</span></div></div><div class="table-scroll"><table><thead><tr><th>EVENT ID</th><th>CLIENT</th><th>OUTCOME</th><th>INSPECT</th></tr></thead><tbody id="event-rows"><tr><td colspan="4" class="empty-row">No recorded events yet.</td></tr></tbody></table></div></div>
+      </div></section>
+
+      <section class="system-section content-wrap" id="system"><div class="section-header"><div><div class="technical-label">04 — SYSTEM / HANDOFF</div><h2>Built to be explained<span class="title-mark">.</span></h2><p>One engine, different industry rules; evidence that clearly separates verified functionality from external access.</p></div></div>
+        <div class="system-grid"><div class="system-block"><span class="system-index">01 / CONFIGURATION</span><h3>Industry profiles</h3><div id="profile-summary"><p>Loading live configuration…</p></div><p class="system-foot">Fields, schedules and routing are loaded from YAML profiles — not hardcoded by the interface.</p></div><div class="system-block"><span class="system-index">02 / DELIVERY BOUNDARY</span><h3>Connector readiness</h3><div class="capability"><span>FastAPI + persistent mock CRM</span><b class="good">LOCAL</b></div><div class="capability"><span>Conflict checks + replay ledger</span><b class="good">LOCAL</b></div><div class="capability"><span>n8n orchestration export</span><b class="pending">IMPORT NEEDED</b></div><div class="capability"><span>GHL HTTP connector / offline emulation</span><b class="good">CONTRACT TESTED</b></div><div class="capability"><span>Live GHL account / native workflows</span><b class="pending">NOT CONNECTED</b></div><div class="capability"><span>Vapi &amp; Twilio inbound adapters</span><b class="good">OFFLINE TESTED</b></div><div class="capability"><span>Real voice / customer outbound</span><b class="pending">DISABLED</b></div><p class="system-foot">Live account verification follows the account-specific setup and validation guide.</p></div><div class="system-block"><span class="system-index">03 / PORTFOLIO PACKAGE</span><h3>Ready for review</h3><p>Use the live test view, audit trail, test report, architecture, and a brief recorded walkthrough as targeted proposal evidence.</p><button type="button" id="download-report" class="export-btn">EXPORT LOCAL EVIDENCE <span>↗</span></button><p class="system-foot">Exports the current synthetic state only, with masked CRM emails.</p></div></div>
+      </section>
+    </main>
+    <footer class="global-footer content-wrap"><div><strong>NECTELIS <span>✳</span></strong><small>CLIENTFLOW AI / THE SIGNAL ROOM</small></div><p>Designed to demonstrate how a system behaves under pressure.<br>Local execution workspace · Provider activation guides included.</p><a href="#top">BACK TO TOP ↑</a></footer>
+  </div>
+
+  <div class="drawer-scrim" id="drawer-scrim" hidden></div>
+  <aside class="settings-drawer" id="settings-drawer" aria-labelledby="settings-title" aria-modal="true" role="dialog" hidden>
+    <div class="drawer-header"><div><small>OPERATOR / CONTROLS</small><h2 id="settings-title">Room settings</h2></div><button type="button" id="close-settings" class="icon-btn" aria-label="Close settings">✕</button></div>
+    <p>Display preferences affect this browser only. The simulation boundary is intentionally locked.</p>
+    <div class="setting-row"><div><b>Compact density</b><span>Fit more execution data on screen.</span></div><label class="toggle"><input type="checkbox" id="compact-setting"><span class="slider"></span></label></div>
+    <div class="setting-row"><div><b>Reduce motion</b><span>Disable ornamental transitions.</span></div><label class="toggle"><input type="checkbox" id="motion-setting"><span class="slider"></span></label></div>
+    <div class="setting-row"><div><b>Connector boundary</b><span>Live provider operations require server-side authorization.</span></div><strong class="locked-value">MOCK LOCKED</strong></div>
+    <div class="setting-critical"><small>LOCAL TEST DATA</small><h3>Clear local test data</h3><p>Deletes local synthetic contacts, events, bookings, and audit records. Does not affect external services.</p><button type="button" id="reset-demo">RESET SYNTHETIC DATA</button></div>
+    <p class="drawer-footer">Use project documentation to configure authorized accounts. Don't paste provider tokens into this screen.</p>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "event_id": "sample-re-001", "source": "website_form", "client_key": "real-estate-demo",
+  "lead": {"first_name":"Morgan","email":"morgan.demo@example.com","phone":"+15550101002",
+  "service":"property_viewing","postal_area":"Demo City","message":"Ready to move next month","consent_to_contact":true},
+  "requested_slot":"2030-10-16T15:00:00-04:00"
+}

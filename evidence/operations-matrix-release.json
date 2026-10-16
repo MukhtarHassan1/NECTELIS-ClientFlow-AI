@@ -1,0 +1,159 @@
+{
+  "created_at_utc": "2026-10-15T18:29:40.233204+00:00",
+  "mode": "ISOLATED HTTP EMULATION + SQLITE",
+  "total": 12,
+  "passed": 12,
+  "live_provider_calls": 0,
+  "cases": [
+    {
+      "provider": "ghl",
+      "scenario": "success",
+      "http_status": 200,
+      "passed": true,
+      "checks": {
+        "Real Python connector methods executed": true,
+        "Provider response matches expected safe outcome": true,
+        "Authorization never exposed": true,
+        "No external network requests": true
+      },
+      "provider_network_calls": 0
+    },
+    {
+      "provider": "ghl",
+      "scenario": "rate_limit",
+      "http_status": 200,
+      "passed": true,
+      "checks": {
+        "Real Python connector methods executed": true,
+        "Provider response matches expected safe outcome": true,
+        "Authorization never exposed": true,
+        "No external network requests": true
+      },
+      "provider_network_calls": 0
+    },
+    {
+      "provider": "ghl",
+      "scenario": "unavailable",
+      "http_status": 200,
+      "passed": true,
+      "checks": {
+        "Real Python connector methods executed": true,
+        "Provider response matches expected safe outcome": true,
+        "Authorization never exposed": true,
+        "No external network requests": true
+      },
+      "provider_network_calls": 0
+    },
+    {
+      "provider": "ghl",
+      "scenario": "unauthorized",
+      "http_status": 200,
+      "passed": true,
+      "checks": {
+        "Real Python connector methods executed": true,
+        "Provider response matches expected safe outcome": true,
+        "Authorization never exposed": true,
+        "No external network requests": true
+      },
+      "provider_network_calls": 0
+    },
+    {
+      "provider": "ghl",
+      "scenario": "timeout",
+      "http_status": 200,
+      "passed": true,
+      "checks": {
+        "Real Python connector methods executed": true,
+        "Provider response matches expected safe outcome": true,
+        "Authorization never exposed": true,
+        "No external network requests": true
+      },
+      "provider_network_calls": 0
+    },
+    {
+      "provider": "vapi",
+      "scenario": "success",
+      "http_status": 200,
+      "passed": true,
+      "checks": {
+        "Provider report mapped into typed lead contract": true,
+        "Real local contact and appointment created": true,
+        "Duplicate call id does not create new appointment": true
+      },
+      "provider_network_calls": 0
+    },
+    {
+      "provider": "vapi",
+      "scenario": "duplicate",
+      "http_status": 200,
+      "passed": true,
+      "checks": {
+        "Provider report mapped into typed lead contract": true,
+        "Real local contact and appointment created": true,
+        "Duplicate call id does not create new appointment": true
+      },
+      "provider_network_calls": 0
+    },
+    {
+      "provider": "vapi",
+      "scenario": "malformed",
+      "http_status": 200,
+      "passed": true,
+      "checks": {
+        "Malformed call identity is rejected": true,
+        "No CRM write attempted": true
+      },
+      "provider_network_calls": 0
+    },
+    {
+      "provider": "twilio",
+      "scenario": "success",
+      "http_status": 200,
+      "passed": true,
+      "checks": {
+        "Original inbound signature valid; tamper blocked": true,
+        "Inbound SMS processed and replay deduplicated": true,
+        "Actual Twilio REST client exercised": true,
+        "Provider outcome safely handled": true
+      },
+      "provider_network_calls": 0
+    },
+    {
+      "provider": "twilio",
+      "scenario": "tamper",
+      "http_status": 200,
+      "passed": true,
+      "checks": {
+        "Original signature valid": true,
+        "Changed body rejected": true
+      },
+      "provider_network_calls": 0
+    },
+    {
+      "provider": "twilio",
+      "scenario": "rate_limit",
+      "http_status": 200,
+      "passed": true,
+      "checks": {
+        "Original inbound signature valid; tamper blocked": true,
+        "Inbound SMS processed and replay deduplicated": true,
+        "Actual Twilio REST client exercised": true,
+        "Provider outcome safely handled": true
+      },
+      "provider_network_calls": 0
+    },
+    {
+      "provider": "twilio",
+      "scenario": "delivery_failed",
+      "http_status": 200,
+      "passed": true,
+      "checks": {
+        "Original inbound signature valid; tamper blocked": true,
+        "Inbound SMS processed and replay deduplicated": true,
+        "Actual Twilio REST client exercised": true,
+        "Provider outcome safely handled": true
+      },
+      "provider_network_calls": 0
+    }
+  ]
+}

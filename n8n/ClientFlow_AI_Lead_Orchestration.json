@@ -1,0 +1,192 @@
+{
+  "name": "NECTELIS | ClientFlow AI | Lead Intake \u2192 Verified Processing \u2192 Booking / Review",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "nectelis-clientflow-demo",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "receive-lead",
+      "name": "Receive Lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.CLIENTFLOW_API_URL || \"http://host.docker.internal:8000/api/v1/leads\" }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.body) }}",
+        "options": {
+          "timeout": 30000
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "X-Clientflow-Key",
+              "value": "={{ $env.CLIENTFLOW_WEBHOOK_API_KEY || \"\" }}"
+            }
+          ]
+        }
+      },
+      "id": "forward-to-validated-api",
+      "name": "Forward to Validated API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        470,
+        320
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "status",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "booked",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ]
+        }
+      },
+      "id": "was-appointment-booked?",
+      "name": "Was Appointment Booked?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        720,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "return-confirmed-booking",
+      "name": "Return Confirmed Booking",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1000,
+        210
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "return-review-/-failure-status",
+      "name": "Return Review / Failure Status",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1000,
+        430
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"status\":\"integration_error\",\"message\":\"Demo backend unavailable or request rejected\"}",
+        "options": {
+          "responseCode": 502
+        }
+      },
+      "id": "return-safe-api-error",
+      "name": "Return Safe API Error",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        760,
+        535
+      ]
+    }
+  ],
+  "connections": {
+    "Receive Lead": {
+      "main": [
+        [
+          {
+            "node": "Forward to Validated API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Forward to Validated API": {
+      "main": [
+        [
+          {
+            "node": "Was Appointment Booked?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Return Safe API Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Was Appointment Booked?": {
+      "main": [
+        [
+          {
+            "node": "Return Confirmed Booking",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Return Review / Failure Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": []
+}

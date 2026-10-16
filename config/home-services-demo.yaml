@@ -1,0 +1,27 @@
+client_key: home-services-demo
+company_name: Northline Home Services [SYNTHETIC]
+industry: home_services
+timezone: America/New_York
+crm_adapter: mock
+calendar_adapter: mock
+calendar:
+  duration_minutes: 60
+  business_hours_start: 9
+  business_hours_end: 18
+pipeline:
+  new: New Inquiry
+  qualified: Qualified
+  booked: Appointment Booked
+  review: Needs Human Review
+qualification:
+  supported_services: [air_conditioner_repair, plumbing, electrical]
+  urgent_words: [urgent, emergency, asap, leaking, no cooling]
+  min_confidence_for_auto_booking: 0.65
+notifications:
+  internal_enabled: true
+  lead_enabled: true
+  external_enabled: false
+  test_recipient_allowlist: [team.demo@example.com]
+reliability:
+  max_transient_attempts: 3
+  idempotency_window_hours: 72

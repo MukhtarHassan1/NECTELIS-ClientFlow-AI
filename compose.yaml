@@ -1,0 +1,36 @@
+services:
+  database:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: clientflow
+      POSTGRES_USER: clientflow
+      POSTGRES_PASSWORD: local_synthetic_demo_password_change_me
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U clientflow"]
+      interval: 5s
+      retries: 10
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "127.0.0.1:8025:8025"
+  api:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      DEMO_MODE: mock
+      DATABASE_URL: postgresql+psycopg://clientflow:local_synthetic_demo_password_change_me@database:5432/clientflow
+      LIVE_OUTBOUND_ENABLED: "false"
+      ADMIN_API_KEY: ${ADMIN_API_KEY:-}
+      WEBHOOK_API_KEY: ${WEBHOOK_API_KEY:-}
+      TEST_MAILPIT_ENABLED: "true"
+      TEST_MAILPIT_HOST: mailpit
+volumes:
+  db_data:

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="660" viewBox="0 0 1280 660" role="img" aria-label="NECTELIS ClientFlow AI architecture with explicit offline integration boundary">
+<rect width="1280" height="660" fill="#121b28"/>
+<text x="64" y="62" fill="#eab990" font-size="17" font-family="monospace" letter-spacing="3">NECTELIS / CLIENTFLOW AI</text>
+<text x="64" y="119" fill="#f2f2ee" font-size="39" font-family="Arial,sans-serif" font-weight="bold">Executable core. Inspectable contracts.</text>
+<text x="64" y="150" fill="#a0b0c3" font-size="16" font-family="Arial,sans-serif">A technical proof of integration boundaries—not a claim of live HighLevel, Vapi or Twilio access.</text>
+<rect x="64" y="203" width="535" height="320" rx="7" fill="#1b293a" stroke="#657d94" stroke-width="1.5"/>
+<text x="92" y="244" fill="#e3a77d" font-size="16" font-family="monospace">01 / REAL LOCAL EXECUTION</text>
+<rect x="91" y="274" width="484" height="64" rx="3" fill="#2c3c50"/>
+<text x="112" y="299" fill="white" font-size="19" font-family="Arial" font-weight="bold">Lead intake and qualification</text><text x="112" y="324" fill="#b0c3d3" font-size="13" font-family="Arial">FastAPI · Pydantic · industry YAML rules</text>
+<path d="M330 339V363" stroke="#f4b788" stroke-width="2"/><path d="M323 355l7 10 7-10" fill="none" stroke="#f4b788" stroke-width="2"/>
+<rect x="91" y="372" width="484" height="64" rx="3" fill="#2c3c50"/>
+<text x="112" y="397" fill="white" font-size="19" font-family="Arial" font-weight="bold">Mock CRM + scheduling</text><text x="112" y="423" fill="#b0c3d3" font-size="13" font-family="Arial">SQLite ledger · slot guard · follow-up / audit</text>
+<text x="96" y="474" fill="#ced7df" font-size="14" font-family="monospace">Replays · collision guards · bounded failures</text>
+<rect x="627" y="203" width="589" height="320" rx="7" fill="#eae7e0"/>
+<text x="656" y="244" fill="#a36d4d" font-size="16" font-family="monospace">02 / OFFLINE PROVIDER CONTRACTS</text>
+<rect x="657" y="275" width="530" height="73" rx="3" fill="#d0d9de"/>
+<text x="679" y="302" fill="#273849" font-size="19" font-family="Arial" font-weight="bold">GoHighLevel adapter</text><text x="679" y="329" fill="#576b77" font-size="13" font-family="Arial">/contacts/upsert → /opportunities/upsert → free-slots → appointments</text>
+<rect x="657" y="373" width="250" height="75" rx="3" fill="#d0d9de"/>
+<text x="679" y="401" fill="#273849" font-size="19" font-family="Arial" font-weight="bold">Vapi intake</text><text x="679" y="427" fill="#576b77" font-size="13" font-family="Arial">end-of-call structuredData</text>
+<rect x="927" y="373" width="260" height="75" rx="3" fill="#d0d9de"/>
+<text x="949" y="401" fill="#273849" font-size="19" font-family="Arial" font-weight="bold">Twilio intake</text><text x="949" y="427" fill="#576b77" font-size="13" font-family="Arial">signed inbound SMS form</text>
+<text x="656" y="486" fill="#7c503d" font-size="14" font-family="monospace">HTTP responses are simulated; real authorization is pending.</text>
+<path d="M598 372h28" stroke="#f2b78b" stroke-width="3" stroke-dasharray="4 7"/>
+<text x="606" y="353" fill="#f2b78b" font-size="11" font-family="monospace" text-anchor="middle">TEST</text>
+<rect x="64" y="552" width="1152" height="63" rx="3" fill="#253449" stroke="#6c7f93"/>
+<text x="91" y="577" fill="#f8c69a" font-size="13" font-family="monospace">BOUNDARY</text>
+<text x="91" y="599" fill="#d7dfe9" font-size="15" font-family="Arial">Live credentials, provider-side permissions, native workflows and call/SMS delivery require authorized external testing.</text>
+</svg>
