@@ -1,69 +1,379 @@
-# NECTELIS | ClientFlow AI
-## Signal Room · Integration Operations Edition
+# NECTELIS — ClientFlow AI
 
-A runnable **FastAPI + SQLite** lead-processing system and provider integration workbench. The release demonstrates cross-system engineering through executable connector code, stateful operations, signed webhooks, durable records, and reproducible failure tests. Its default environment is an **isolated, synthetic local sandbox**; no external provider is contacted without separate operator authorization.
+### Voice-event processing. CRM orchestration. Appointment automation. Built for reliability.
 
-![Provider Integration Workbench](evidence/integration-workbench-tested.png)
+**Python · FastAPI · Vapi · Twilio · GoHighLevel · SQLite · REST APIs · Webhooks**
 
-### Get started
+ClientFlow AI is a configurable lead-to-booking automation system developed by **NECTELIS**, a software engineering team specializing in AI automation, backend services, and API integrations.
 
-**Windows:** extract into a new folder → run `RUN_WINDOWS.bat` → open [http://127.0.0.1:8000](http://127.0.0.1:8000) → navigate to **02 Integrations** → select a provider and run. Full walkthrough: [`OPERATIONS_START_HERE.md`](OPERATIONS_START_HERE.md).
+The system demonstrates how customer inquiries and structured voice-agent events can be validated, qualified, synchronized with CRM records, routed through scheduling workflows, and monitored through detailed execution traces.
 
-**Validation:** double-click `RUN_TESTS_WINDOWS.bat`; it runs pytest and a fresh 12-case provider scenario suite in a temporary SQLite database. Independent JSON reports can be exported from the browser or CLI.
+It goes beyond the basic webhook-to-CRM pattern by implementing replay protection, appointment conflict handling, provider error classification, webhook authentication, retry safeguards, and persistent audit records.
 
-### Implemented
+**Implementation status:** Working local application with executable, offline-tested provider integrations. Real GHL, Vapi, and Twilio account activation requires authorized credentials, provider setup, and live integration testing.
 
-| Area | Executable functionality | Verification boundary |
-|---|---|---|
-| Local lead-to-booking engine | Typed webhooks, contact lookup/upsert, qualification, booking conflict detection, replay ledger, local follow-ups/audit | SQLite and API tested |
-| GoHighLevel | Actual HTTP connector methods for contacts, opportunities, availability, appointments; orchestrated success/retry/401/timeout paths | Emulator contract tested; **live GHL not connected** |
-| Vapi | Authenticated end-of-call intake, structured-data normalization, replay by call ID, local CRM lookup and booking | Local API and SQLite tested; no real voice call |
-| Twilio | Form webhook signatures, SMS-to-review, outbound REST client with Basic Auth, allowlist/consent guard, delivery callbacks and persisted status transitions | Real client code tested against emulator; no SMS sent |
-| Authorized vendor tests | Explicit opt-in CLI, per-account configuration and durable job reservations against ambiguous writes | Code/unit tested; requires live provider verification |
-| Integrations UI | Editable provider, scenario, name and reference; backend-generated traces; download execution receipt | 12/12 browser-driven local scenarios tested |
-| Configurable business profiles | Home services and real estate YAML configurations | Locally tested |
-| n8n | Portable workflow JSON export | Not imported into live workspace |
+---
 
-### Repository orientation
+## Application Preview
 
-```text
-clientflow/                FastAPI, schema validation, local state, provider connectors
-  api.py                  Intake, provider callbacks, integration run API
-  service.py              Local lead/booking engine
-  provider_orchestrator.py   GHL contact → opportunity → slot → appointment
-  ghl_connector.py        Actual GHL HTTP methods
-  channel_adapters.py     Twilio + Vapi event normalization and signature checks
-  twilio_gateway.py       Twilio REST sender + signed status callbacks
-  live_bridge.py          Guarded GHL live-test jobs and durable replay state
-  workbench.py            Reviewer-editable provider executions
-frontend/                 Signal Room UI, CSS, JS
-tests/                    Regression, security, integrations
-scripts/                  Independent execution evidence, activation CLI
-config/                   Industry profile YAML
-evidence/                 Screenshots and sanitized offline verification
-n8n/                      Workflow JSON (workspace import pending)
-docs/                     Activation and technical notes
-portfolio/                Case study and scenario-specific proposal material
+![ClientFlow AI — Integration Workbench](assets/readme/integration-workbench.png)
+
+*Integration Operations Workbench — configurable scenarios, provider operations, execution receipts, and API traces.*
+
+### Independent Execution Verification
+
+![ClientFlow AI — Reviewer Challenge](assets/readme/reviewer-challenge.png)
+
+*Reviewer-controlled inputs are processed through FastAPI and checked against persistent SQLite records, including duplicate-event and conflicting-replay scenarios.*
+
+---
+
+## The Business Problem
+
+Customer inquiries often pass through multiple disconnected systems: a website form, voice agent, CRM, calendar, notification service, and internal operations team.
+
+A simple automation may work when everything succeeds, yet behave unpredictably when:
+
+- The same webhook arrives more than once.
+- A contact already exists in the CRM.
+- An appointment slot is no longer available.
+- A provider returns HTTP 429 or 401.
+- A remote operation succeeds but its response is lost.
+- A delivery callback reports an unsuccessful message.
+- An incoming payload is malformed or unauthorized.
+
+ClientFlow AI addresses these problems through a structured processing engine and isolated provider connectors, making each operation observable and testable.
+
+## System Architecture
+
+```mermaid
+flowchart TD
+    A["Website / API Lead"] --> C["FastAPI Intake"]
+    B["Vapi End-of-Call Event"] --> C
+    T["Twilio Signed SMS Webhook"] --> C
+
+    C --> D["Validation and Normalization"]
+    D --> E["Replay Protection"]
+    E --> F["Qualification and Routing"]
+
+    F --> G["Local CRM and Calendar Engine"]
+    G --> H[("SQLite State and Audit")]
+
+    F --> I["Provider Integration Layer"]
+    I --> J["GoHighLevel HTTP Connector"]
+    I --> K["Twilio Messaging Gateway"]
+
+    J --> L["Offline Provider Emulator"]
+    K --> L
+
+    J -. "Authorized live-test configuration" .-> M["GHL Test Account"]
+    K -. "Authorized live-test configuration" .-> N["Twilio Account"]
+
+    H --> O["Execution Receipts and Diagnostics"]
+    L --> O
 ```
 
-### Real account activation
+The default application runs locally with synthetic data. The provider workbench exercises integration methods against controlled API responses. Optional live-test paths are separately configured and guarded.
 
-Do **not** paste tokens in the web interface. Copy `.env.example` to an ignored `.env` and follow [`docs/PROVIDER_ACTIVATION.md`](docs/PROVIDER_ACTIVATION.md). The optional activation CLI does nothing remotely unless explicitly authorized. Provider subscriptions/credentials **alone are not sufficient**: GHL location, pipeline, stages, calendar and availability; Vapi assistant/server URL and authentication; Twilio phone number, messaging permissions, HTTPS callback URLs and recipient consent must also be configured. External responses, telephony delivery and permissions have **not** been live-tested for this release.
+## Core Capabilities
 
-**Live-test path:** Authorized Vapi end-of-call events can optionally call the guarded GHL test-account bridge. This switch is disabled by default and must be verified with real account access. Twilio voice/SIP forwarding, Vapi synchronous in-call tool-calls, native GHL snapshots and a full production multi-tenant SaaS are **not** included.
+| Engineering area | Implemented functionality |
+|---|---|
+| Lead ingestion | Typed REST endpoints, webhook intake, validation and normalization |
+| CRM operations | Contact identification, lookup, create/update behavior and configurable routing |
+| Qualification | Deterministic business-rule evaluation |
+| Scheduling | Availability checks, appointment creation and conflict handling |
+| State management | Persistent local contacts, events, appointments and audit records |
+| Replay protection | Event identity tracking and duplicate-action prevention |
+| API reliability | Bounded retries, failure classification and ambiguous-write handling |
+| Security | Webhook signature verification, restricted outbound operation and test-recipient controls |
+| Diagnostics | Structured execution receipts, HTTP traces and audit inspection |
+| Configuration | Home-services and real-estate business profiles |
+| Testing | Automated regression tests and executable provider scenarios |
 
-### Safety and scope
+## Provider Integration Engineering
 
-- Local synthetic data only by default; real messaging/outbound disabled.
-- Browser UI does not accept provider secrets.
-- Replay and ambiguous write outcomes are isolated rather than silently retried.
-- Restricted recipient allowlists, opt-in and explicit write switches govern authorized test sends.
-- Signatures are validated on classic Twilio form webhooks, and Vapi secret on authenticated end-of-call reports.
-- Dashboard does **not** have user authentication and is intended only for private localhost operation, not an exposed public server.
-- Production requires additional security, permission, rate-limiting, backup and compliance work, plus provider-specific live tests.
+### 01 — Vapi | Voice-Event Processing
 
-### Client walkthrough and proof assets
+ClientFlow AI includes a Vapi event adapter that accepts authenticated, structured end-of-call reports and converts them into normalized lead events.
 
-[`docs/CLIENT_DEMO_STORYBOARD.md`](docs/CLIENT_DEMO_STORYBOARD.md) · [`docs/ENGINEERING_CHANGELOG.md`](docs/ENGINEERING_CHANGELOG.md) · [`portfolio/CASE_STUDY_OPERATIONS.md`](portfolio/CASE_STUDY_OPERATIONS.md)
+**Implemented behaviors:**
 
-The correct client-facing description is **“implemented and offline-tested integration adapters with a working local CRM/booking engine; live account-specific validation is performed on authorized provider accounts.”** Do not state that a real GHL location was connected, that phone calls/SMS occurred, or that the interface alone proves production readiness.
+- Authenticated end-of-call event ingestion.
+- Structured customer information extraction.
+- Stable event identification using call information.
+- Lead qualification and local CRM processing.
+- Appointment scheduling through the local processing engine.
+- Duplicate-event protection.
+- Malformed-event rejection and execution logging.
+
+**Demonstrated workflow:**
+
+`Vapi event → FastAPI → Validation → Lead processing → CRM record → Appointment → Audit`
+
+**Verification boundary:** End-of-call processing is tested locally. A live Vapi conversation, real-time audio pipeline, and synchronous in-call tool execution are not demonstrated by this repository.
+
+### 02 — Twilio | Messaging Integration
+
+The Twilio integration implements webhook security, outbound messaging request construction, and delivery-status processing.
+
+**Implemented behaviors:**
+
+- Inbound SMS webhook normalization.
+- Twilio signature verification.
+- Rejection of modified or invalid signatures.
+- Outbound REST API client using authenticated requests.
+- Consent and permitted-recipient safeguards.
+- Signed delivery-status callback processing.
+- Persistent message status transitions.
+- Simulated rate-limit and delivery-failure handling.
+
+**Demonstrated workflow:**
+
+`Inbound SMS → Signature validation → Lead processing → Outbound request → Delivery callback → Persistent audit`
+
+**Verification boundary:** Provider requests and callbacks have been tested offline. The release does not demonstrate a real SMS delivery, live telephone call, or Twilio voice/SIP operation.
+
+### 03 — GoHighLevel | CRM and Calendar Integration
+
+The GoHighLevel connector contains executable HTTP methods and an orchestration layer for common CRM and appointment operations.
+
+**Implemented behaviors:**
+
+- Contact upsert requests.
+- Opportunity upsert and stage management.
+- Calendar availability requests.
+- Appointment creation requests.
+- HTTP 429 retry behavior.
+- Authorization-failure handling.
+- Replay protection.
+- Reconciliation handling for uncertain booking outcomes.
+
+**Demonstrated workflow:**
+
+`Lead → Contact upsert → Opportunity → Calendar availability → Appointment → Stage update`
+
+**Verification boundary:** These operations have been exercised against an offline provider emulator. An actual HighLevel location, pipeline, and calendar have not been connected or live-verified.
+
+### 04 — n8n | Workflow Orchestration
+
+The repository includes an n8n workflow export for orchestration and integration demonstrations.
+
+The workflow is supplied as a reusable integration artifact. Import and execution in an authorized n8n workspace require separate validation.
+
+## Engineering Reliability
+
+ClientFlow AI places particular emphasis on situations where integrations frequently fail.
+
+| Scenario | Expected system behavior |
+|---|---|
+| Repeated lead event | Recognize replay and avoid duplicate downstream actions |
+| Same event ID, changed request | Reject conflicting replay with HTTP 409 |
+| Existing contact | Update the appropriate record rather than blindly creating another |
+| Unavailable appointment | Refuse the booking safely |
+| Provider rate limit | Apply bounded recovery behavior |
+| Provider authorization failure | Stop unauthorized operations and record the failure |
+| Uncertain booking response | Require reconciliation instead of blindly repeating a potentially successful write |
+| Failed message delivery | Record delivery state and expose the failure |
+| Invalid or tampered webhook | Reject the request before trusted processing |
+
+The goal is not to claim that failures never happen, but to make failure handling explicit, recoverable where possible, and inspectable.
+
+## Verification and Test Evidence
+
+The packaged October 2026 release recorded:
+
+| Verification | Release result |
+|---|---|
+| Python automated tests | 82 passing |
+| Provider operations matrix | 12/12 passing |
+| Browser-driven offline scenarios | 12/12 passing |
+| Live external provider calls during release testing | 0 |
+
+These are **release-specific offline results**, not production metrics. Results can be reproduced locally.
+
+### Run the tests
+
+On Windows:
+
+```powershell
+.\RUN_TESTS_WINDOWS.bat
+```
+
+Or run the Python suite directly:
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q
+```
+
+The test launcher also executes the provider operations matrix and produces local JSON evidence.
+
+For a deeper review, inspect the relevant tests in `tests/` and the scenario execution utilities in `scripts/`.
+
+---
+
+## Quick Start
+
+### Requirements
+
+- Windows, macOS, or Linux.
+- Python 3.11 or newer, with Python 3.11 recommended for the included Windows launcher.
+- Internet access for installing Python dependencies.
+- No paid GHL, Vapi, or Twilio account required for local testing.
+
+### Windows
+
+Clone the repository:
+
+```bash
+git clone https://github.com/MukhtarHassan1/NECTELIS-ClientFlow-AI.git
+cd NECTELIS-ClientFlow-AI
+```
+
+Start the application:
+
+```powershell
+.\RUN_WINDOWS.bat
+```
+
+Then open:
+
+**http://127.0.0.1:8000**
+
+### Manual Python Setup
+
+```bash
+python -m venv .venv
+```
+
+Activate the virtual environment and install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Start FastAPI:
+
+```bash
+uvicorn clientflow.api:app --host 127.0.0.1 --port 8000
+```
+
+For platform-specific instructions, consult [Operations Setup](docs/OPERATIONS_START_HERE.md).
+
+### Explore the Application
+
+**Test Studio:** Execute lead-management, scheduling, replay, and failure scenarios.
+
+**Integrations:** Run configurable Vapi, Twilio, and GHL provider scenarios and inspect execution receipts.
+
+**Evidence:** Review stored execution results and audit activity.
+
+**System:** Inspect supported configuration and runtime information.
+
+Keep the application on localhost unless it has been independently secured for public deployment.
+
+---
+
+## Integration Activation
+
+The repository separates demonstration configuration from authorized provider credentials.
+
+Copy `.env.example` into an ignored `.env` file and configure only the provider services you intend to test.
+
+Never commit credentials or paste private API keys into a public issue or browser screenshot.
+
+See [Provider Activation Guide](docs/PROVIDER_ACTIVATION.md) for provider-specific steps.
+
+**GoHighLevel:** Requires an authorized location, appropriate permissions, pipeline/stage mapping, calendar configuration, and live API validation.
+
+**Vapi:** Requires an authorized account, assistant setup, webhook/server URL, authentication, structured event configuration, and actual call testing.
+
+**Twilio:** Requires an authorized account, a permitted sender, messaging configuration, publicly reachable HTTPS callbacks, and consent-compliant test recipients.
+
+Credentials alone do not establish deployment readiness. Each integration requires account-specific configuration and end-to-end validation.
+
+---
+
+## Repository Structure
+
+```text
+NECTELIS-ClientFlow-AI/
+│
+├── clientflow/              # FastAPI engine and provider connectors
+├── frontend/                # Signal Room interface
+├── config/                  # Configurable industry profiles
+├── fixtures/                # Synthetic test payloads
+├── tests/                   # Regression and integration-contract tests
+├── scripts/                 # Independent verification and setup utilities
+├── n8n/                     # Workflow export
+├── evidence/                # Offline execution and visual evidence
+├── assets/readme/           # GitHub presentation screenshots
+├── docs/                    # Architecture, activation and handoff material
+├── portfolio/               # Technical case study and demonstration materials
+├── .github/workflows/       # CI configuration
+│
+├── .env.example             # Safe environment variable template
+├── requirements.txt         # Python dependencies
+├── pyproject.toml           # Python project configuration
+├── Dockerfile               # Container build definition
+├── compose.yaml             # Container composition configuration
+├── RUN_WINDOWS.bat          # Windows application launcher
+└── RUN_TESTS_WINDOWS.bat    # Windows verification launcher
+```
+
+## Technical Documentation
+
+- [Provider Activation](docs/PROVIDER_ACTIVATION.md)
+- [Client Demonstration Storyboard](docs/CLIENT_DEMO_STORYBOARD.md)
+- [Engineering Change Log](docs/ENGINEERING_CHANGELOG.md)
+- [Operations Setup](docs/OPERATIONS_START_HERE.md)
+- [Technical Case Study](portfolio/CASE_STUDY_OPERATIONS.md)
+
+## Engineering Decisions
+
+**Deterministic operations for critical actions.** Contact identity, replay handling, permission checks, and booking availability should not depend on unvalidated LLM decisions.
+
+**Provider isolation.** External API methods are separated from core lead-processing logic to support replacement, testing, and account-specific configuration.
+
+**Explicit failure states.** Authentication failures, timeouts, booking conflicts, and delivery errors remain visible rather than being silently reported as successful operations.
+
+**Reproducibility.** Synthetic fixtures, local persistence, test scripts, and documented runtime options allow engineers to examine behavior without access to private customer accounts.
+
+**Measured claims.** Offline tests and provider contract validation are distinguished from live integration verification and production deployment.
+
+## Scope and Limitations
+
+This repository is an engineering demonstration and integration foundation—not a production-certified SaaS platform.
+
+The release does not establish:
+
+- A live GHL deployment or native GHL snapshot.
+- A deployed Vapi or Twilio voice agent handling real calls.
+- Measured conversational latency, STT/TTS performance, or interruption handling.
+- Live SMS delivery.
+- An independently verified n8n Cloud execution.
+- Multi-tenant production security or regulatory compliance.
+
+The local dashboard is intended for private development and demonstration. Production use would require authentication, operational monitoring, infrastructure hardening, backups, access controls, and provider-specific end-to-end tests.
+
+## About NECTELIS
+
+**NECTELIS — AI Automation, Integrations & Software Development**
+
+We build practical automation systems, connect business software, develop API-driven applications, and implement workflows that prioritize maintainability and reliable operation.
+
+Our work spans AI automation, voice-agent integrations, CRM systems, Python and Node.js backend development, web applications, and business process engineering.
+
+ClientFlow AI is part of our portfolio of reusable technical demonstrations.
+
+**Explore the implementation. Review the tests. Examine the failure paths.**
+
+---
+
+### Copyright and Usage
+
+© 2026 NECTELIS.
+
+No general open-source license has been selected for this repository. Public availability does not automatically grant permission for redistribution or commercial reuse.
+
+See [Copyright and Licensing Notes](docs/LICENSE_DECISION.md).
